@@ -50,7 +50,7 @@ hence if size is 0 then it points itself hence it's inuse_bit is 0 hence free() 
 
 #### 1) Ingredients 
 
-```c
+``` c
         char *overflowed_ptr = (char *)malloc(256);
         char *ptr1 = (char *)malloc(256);
         char *ptr2 = (char *)malloc(256);
