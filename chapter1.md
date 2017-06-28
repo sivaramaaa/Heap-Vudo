@@ -1,6 +1,7 @@
 ## Unlink Explot
 
 ```c
+
 #define unlink(P, BK, FD) {                                            
   FD = P->fd;                                                          
   BK = P->bk;                                                          
@@ -51,6 +52,7 @@ hence if size is 0 then it points itself hence it's inuse_bit is 0 hence free() 
 #### 1) Ingredients 
 
 ``` c
+
         char *overflowed_ptr = (char *)malloc(256);
         char *ptr1 = (char *)malloc(256);
         char *ptr2 = (char *)malloc(256);
@@ -63,9 +65,9 @@ hence if size is 0 then it points itself hence it's inuse_bit is 0 hence free() 
 ```
 #### 2) Code flow 
 
-```c
-void
-_int_free(mstate av, Void_t* mem)
+``` c
+
+void  _int_free(mstate av, Void_t* mem)
 {
   mchunkptr       p;           /* chunk corresponding to mem */
   INTERNAL_SIZE_T size;        /* its size */
@@ -209,10 +211,10 @@ for(;;) {
 
 #### 2) Code flow 
 
-```c
+``` c
 
-void
-public_fREe(Void_t* mem)
+
+void public_fREe(Void_t* mem)
 {
   mstate ar_ptr;
   mchunkptr p;                          /* chunk corresponding to mem */
@@ -372,7 +374,7 @@ The most expected one and the easiest too :)
 
 #### Code flow
 
-```c
+``` c
 
 
 void _int_malloc(mstate av, size_t bytes)
