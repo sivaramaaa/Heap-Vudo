@@ -51,34 +51,48 @@ It's functionalities are :
     ....
 
   ```
-  
-  #### Exploit 
+<br> <br>
+
+#### Exploit 
   
   We can see that after searching a word , we are able to delete a sentence, and it's contents as free'd out , but the word linked 
-  list is not freed hence it can be a UAF , but there is a check *i->sentence which prevents us from double free , but a good a thing is after freeing it it as added to fastbin list , and if we free another sentece a fd pointer is placed at previous chunk , now
+  
+  list is not freed hence it can be a UAF , but there is a check *i->sentence which prevents us from double free , but a good a thing 
+  
+  is after freeing it it as added to fastbin list , and if we free another sentece a fd pointer is placed at previous chunk , now
+  
   i->sentence is not null and now we can search for '\x00' and delete the sentance again giving us double free corruption 
   
   So the plan is :
 
   * Create 3 sentences "A"*48+" C"
+  
   * now delete all 3 by searching for word "C"
+  
   * now the freelist would be 1->2->3
+  
   * now delete 2 again causing freelist to be 2->1->2
+  
   * now allocate a sentence of size 48 now we will get 2 , with this we could corrupt fd
+  
   * now allocate 2 more sentences to make bin->corruptd fd 
+  
   * now we allocate a sentence to have arbitary write
+  
   * since the malloc checks the fd->size with malloc(size) we need to return to area where size is 0x40
+  
   * now overwrite eip and checkmate 
   
-  ##### Leaking stack :
+#### Leaking stack :
   
    the func read_num gets 48 bytes , if we give "A"*48 it null terminated and would leak stack address 
    
- ##### Leaking libc :
+#### Leaking libc :
 
    since the small bins have fd and bk pointer the bk pointer of 1'st chunk would contain libc address 
-   
-  #### Exploit code :
+
+      
+#### Exploit code :
   
 ```
 from pwn import *
