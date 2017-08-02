@@ -1,4 +1,6 @@
-# 0ctf Quals 2017 - Babyheap
+# 0ctf Quals 2017 - Babyheap 
+
+### Double allocation && Heap-overflow 
 
 The binary given was NX , Pie , Stack canary enabled .
 
