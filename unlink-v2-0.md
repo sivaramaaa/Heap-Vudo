@@ -28,10 +28,11 @@ For this method to work u need to have
   
        * such that it points at start of fake chunk 
        * this makes our chunk_0 to shrink
+ <br>
                            
   * set  chunk1->size prev inuse bit 0 
   
- ### 3) Unlink
+### 3) Unlink
  
   * Now free(chunk_1)
    
