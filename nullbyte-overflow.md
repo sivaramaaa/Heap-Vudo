@@ -13,7 +13,9 @@ For This method to work
 3) Make sure u fill it with "A"*0x1f0+pack(0x200)+"B"x40 , so that it passes the 
 
 ``` prevsize (next_chunk) == size  ``` check
-(NOTE :"A"*0x1f0 coz we are filling from (p+0x10))
+
+(NOTE :"A"*0x1f0 coz we are filling from (p+0x10)
+this check is done in malloc-->unlink-->check)
 
 4) malloc( 0x100 ) # the chunk going to be fooled C
 
